@@ -41,16 +41,16 @@ async def track_rblx_status():
     updates = 1
 
     while True:
-        rblx_id = (os.environ("HHP_RBLX"), os.environ("ICY_RBLX"))
+        rblx_id = (os.getenv("HHP_RBLX"), os.getenv("ICY_RBLX"))
 
         for user_id in rblx_id:
             rblx_status = get_rblx_presence(user_id)
 
             try:
                 async with aiohttp.ClientSession() as session:
-                    webhook = Webhook.from_url(os.environ("RBLX_WEBHOOK_URL"), session=session)
+                    webhook = Webhook.from_url(os.getenv("RBLX_WEBHOOK_URL"), session=session)
                     
-                    username = f"GeorgeGodsent ({user_id})" if user_id == os.environ("HHP_RBLX") else f"IcyQueenbee ({user_id})"
+                    username = f"GeorgeGodsent ({user_id})" if user_id == os.getenv("HHP_RBLX") else f"IcyQueenbee ({user_id})"
                     embed = discord.Embed(title=f"{username} | {rblx_status}")
                     await webhook.send(embed=embed, username="RBLX Detection")
 
