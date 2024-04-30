@@ -62,30 +62,6 @@ async def track_rblx_status():
 
         time.sleep(120) # Check status every minute
 
-
-async def get_discord_presence(user_id):
-    pass
-
-async def track_discord_status():
-    discord_id = (os.environ("HHP_Discord"), os.environ("ICY_DISCORD"))
-
-    for user_id in discord_id:
-        discord_status = get_discord_presence()
-
-        try:
-            async with aiohttp.ClientSession() as session:
-                webhook = Webhook.from_url(os.environ("DISCORD_WEBHOOK_URL"), session=session)
-                
-                username = f"GeorgeGodsent ({user_id})" if user_id == os.environ("HHP_DISCORD") else f"IcyQueenbee ({user_id})"
-                embed = discord.Embed(title=f"{username} | {discord_status}")
-                await webhook.send(embed=embed, username="Discord Detection")
-
-                print(f"Discord message sent successfully!")   
-        
-        except Exception as e:
-            print(f"Discord Error sending message: {e}")
-
-
 if __name__ == "__main__":
     loop = asyncio.new_event_loop()
     loop.run_until_complete(track_rblx_status())
