@@ -60,15 +60,9 @@ async def track_rblx_status():
             except Exception as e:
                 print(f"Error sending message: {e}")
 
-            # print(f"{user_id}: {rblx_status}")
-
         time.sleep(120) # Check status every minute
 
 if __name__ == "__main__":
     loop = asyncio.new_event_loop()
     loop.run_until_complete(track_rblx_status())
     loop.close()
-
-
-# if __name__ == "__main__":
-#     track_rblx_status()
