@@ -28,8 +28,10 @@ def get_rblx_presence(user_id):
         data = response.json()
         if len(data["userPresences"]) > 0:
             presence = data["userPresences"][0]["userPresenceType"]
-            if presence == 1 or presence == 2:
-                return "Online"
+            if presence == 1:
+                return "On Website"
+            elif presence == 2:
+                return "In-game"
             else:
                 return "Offline"
         else:
